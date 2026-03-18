@@ -1,0 +1,48 @@
+name: Update News Daily
+
+on:
+  schedule:
+    # 每天北京时间 00:00 (午夜) 运行 (UTC 16:00)
+    - cron: '0 16 * * *'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  update-news:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        
+    - name: Fetch news
+      run: |
+        python main_resume.py
+      env:
+        OPENCLAW_API_KEY: ${{ secrets.OPENCLAW_API_KEY }}
+      continue-on-error: true
+      
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: './output'
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
