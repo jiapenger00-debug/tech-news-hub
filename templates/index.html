@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ site.title }}</title>
+    <meta name="description" content="{{ site.description }}">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Translation Bar -->
+    <div class="translate-bar" id="translateBar" style="display:none;">
+        <div class="container">
+            <span>🌐 此页面为英文，需要翻译吗？</span>
+            <button class="translate-page-btn" onclick="translateCurrentPage()">翻译成中文</button>
+            <button class="translate-close-btn" onclick="closeTranslateBar()">✕</button>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">🤖 {{ site.title }}</h1>
+            <p class="tagline">{{ site.description }}</p>
+            <div class="meta">
+                <span class="update-time">🕐 更新时间: {{ update_time }}</span>
+                <span class="total-news">📰 共 {{ news_count }} 条新闻</span>
+            </div>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-left">
+                <button class="nav-btn active" data-filter="all">全部</button>
+                <button class="nav-btn" data-filter="zh">🇨🇳 中文</button>
+                <button class="nav-btn" data-filter="en">🇺🇸 英文</button>
+                <button class="nav-btn" data-filter="ai">🤖 AI</button>
+                <button class="nav-btn" data-filter="ev">🚗 新能源车</button>
+            </div>
+            <div class="nav-right">
+                <span class="sort-label">排序：</span>
+                <select class="sort-select" id="sortSelect">
+                    <option value="priority">🔥 热度优先</option>
+                    <option value="time">🕐 时间优先</option>
+                </select>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="container">
+            <div class="news-grid" id="newsGrid">
+                {% for news in news_list %}
+                <article class="news-card" 
+                         data-lang="{{ news.language }}"
+                         data-category="{% if news.is_ai_focused %}ai{% endif %}{% if news.is_ev_focused %} ev{% endif %}"
+                         data-priority="{{ news.priority | default(5) }}"
+                         data-time="{{ news.published }}">
+                    <div class="news-header">
+                        <span class="news-source">{{ news.source }}</span>
+                        <span class="news-lang">{% if news.language == 'zh' %}🇨🇳{% else %}🇺🇸{% endif %}</span>
+                        {% if news.is_hot %}
+                        <span class="tag hot-tag">🔥 热门</span>
+                        {% endif %}
+                        {% if news.is_ai_focused %}
+                        <span class="tag ai-tag">🤖 {{ news.ai_subtype }}</span>
+                        {% endif %}
+                        {% if news.is_ev_focused %}
+                        <span class="tag ev-tag">🚗 新能源车{% if news.ev_brand %}-{{ news.ev_brand }}{% endif %}</span>
+                        {% endif %}
+                    </div>
+                    
+                    <h2 class="news-title">
+                        <a href="{{ news.url }}" 
+                           target="_blank" 
+                           rel="noopener"
+                           onclick="handleLinkClick(event, this.href, '{{ news.language }}')">
+                            {% if news.language == 'en' %}
+                            🌐 {{ news.translated_title or news.title }}
+                            {% else %}
+                            {{ news.title }}
+                            {% endif %}
+                        </a>
+                    </h2>
+                    
+                    <div class="core-content">
+                        <div class="core-label">💡 核心要点</div>
+                        <p class="news-summary">{{ news.core_summary or news.summary }}</p>
+                    </div>
+                    
+                    {% if news.language == 'en' %}
+                    <div class="translate-options">
+                        <button class="translate-link-btn" onclick="openTranslatedPage('{{ news.url }}')">
+                            🌐 查看翻译版本
+                        </button>
+                        <a href="{{ news.url }}" target="_blank" class="read-more">查看英文原文 →</a>
+                    </div>
+                    {% endif %}
+                    
+                    <div class="news-footer">
+                        <span class="news-time">{{ news.published[:10] if news.published else '今日' }}</span>
+                        {% if news.priority >= 8 %}
+                        <span class="priority-badge">🔥 高热度</span>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; {{ site.title }} - 自动生成于 {{ update_time }}</p>
+            <p>🤖 VLM | 👁️ VLA | 🦾 具身智能 | 🔌 AI芯片 | 🌐 多模态 | 🚗 新能源车</p>
+        </div>
+    </footer>
+
+    <!-- Translation Modal -->
+    <div class="modal" id="translateModal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3>🌐 选择浏览方式</h3>
+            <p id="modalUrl" style="word-break:break-all;color:#666;font-size:0.9rem;margin-bottom:20px;"></p>
+            <div class="modal-buttons">
+                <button class="btn-primary" onclick="openWithTranslation()">查看翻译版本 (中文)</button>
+                <button class="btn-secondary" onclick="openOriginal()">查看英文原文</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
