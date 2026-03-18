@@ -1,0 +1,216 @@
+{
+  "site": {
+    "title": "AI科技前沿 - AI Tech Frontier",
+    "description": "专注VLM、VLA、具身智能、AI芯片、多模态大模型、新能源车等前沿科技资讯",
+    "language": "zh-CN",
+    "author": "AI Tech Frontier"
+  },
+  "sources": {
+    "chinese": [
+      {
+        "name": "机器之心",
+        "url": "https://www.jiqizhixin.com/rss",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 10
+      },
+      {
+        "name": "量子位",
+        "url": "https://www.qbitai.com/feed",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 10
+      },
+      {
+        "name": "AI科技评论",
+        "url": "https://www.leiphone.com/feed",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 9
+      },
+      {
+        "name": "新智元",
+        "url": "https://www.ainewsblog.com/feed",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 9
+      },
+      {
+        "name": "高工智能汽车",
+        "url": "https://www.gg-ai.com/rss",
+        "enabled": true,
+        "type": "rss",
+        "category": "智能汽车",
+        "priority": 8
+      },
+      {
+        "name": "汽车之心",
+        "url": "https://www.autobit.xyz/rss",
+        "enabled": true,
+        "type": "rss",
+        "category": "智能汽车",
+        "priority": 8
+      }
+    ],
+    "english": [
+      {
+        "name": "TechCrunch AI",
+        "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 10
+      },
+      {
+        "name": "VentureBeat AI",
+        "url": "https://venturebeat.com/category/ai/feed/",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 9
+      },
+      {
+        "name": "The Verge AI",
+        "url": "https://www.theverge.com/ai-artificial-intelligence/rss/index.xml",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 9
+      },
+      {
+        "name": "Ars Technica AI",
+        "url": "https://arstechnica.com/tag/artificial-intelligence/feed/",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 8
+      },
+      {
+        "name": "MIT Technology Review",
+        "url": "https://www.technologyreview.com/feed/",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 10
+      },
+      {
+        "name": "OpenAI Blog",
+        "url": "https://openai.com/blog/rss.xml",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 10
+      },
+      {
+        "name": "NVIDIA Blog",
+        "url": "https://blogs.nvidia.com/blog/feed/",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI芯片",
+        "priority": 10
+      },
+      {
+        "name": "Google AI Blog",
+        "url": "https://ai.googleblog.com/feeds/posts/default",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 10
+      },
+      {
+        "name": "Electrek EV",
+        "url": "https://electrek.co/feed/",
+        "enabled": true,
+        "type": "rss",
+        "category": "新能源车",
+        "priority": 8
+      },
+      {
+        "name": "InsideEVs",
+        "url": "https://insideevs.com/rss/news/all/",
+        "enabled": true,
+        "type": "rss",
+        "category": "新能源车",
+        "priority": 7
+      }
+    ]
+  },
+  "fetch": {
+    "max_articles_per_source": 15,
+    "request_timeout": 30,
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "sort_by": "priority",
+    "ai_priority_boost": true,
+    "strict_filter": true
+  },
+  "summarizer": {
+    "enabled": true,
+    "max_summary_length": 150,
+    "language": "zh-CN",
+    "use_ai": true,
+    "ai_model": "moonshot/kimi-k2.5"
+  },
+  "output": {
+    "template": "templates/index.html",
+    "output_dir": "output",
+    "static_dir": "static"
+  },
+  "schedule": {
+    "enabled": true,
+    "time": "00:00"
+  },
+  "translation": {
+    "enabled": true,
+    "target_language": "zh-CN",
+    "api": "google_translate",
+    "auto_translate_links": true
+  },
+  "categories": {
+    "ai_keywords": [
+      "VLM", "Vision-Language Model", "视觉语言模型",
+      "VLA", "Vision-Language-Action", "视觉语言动作",
+      "具身智能", "Embodied AI", "人形机器人", "Humanoid Robot",
+      "AI芯片", "AI Chip", "GPU", "NPU", "TPU", "神经网络处理器",
+      "多模态", "Multimodal", "全模态", "Omni-modal",
+      "大模型", "LLM", "Large Language Model",
+      "端到端", "End-to-End",
+      "Transformer", "Diffusion", "GPT", "Claude", "Gemini",
+      "自动驾驶", "Autonomous Driving", "FSD", "智能驾驶",
+      "感知", "决策", "规划",
+      "AGI", "通用人工智能"
+    ],
+    "ev_keywords": [
+      "新能源车", "电动汽车", "电动车", "EV", "Electric Vehicle",
+      "比亚迪", "BYD", "刀片电池", "DM-i", "仰望", "腾势", "方程豹",
+      "特斯拉", "Tesla", "Model",
+      "蔚来", "NIO", "ET", "ES", "EC",
+      "小鹏", "XPeng", "G6", "G9", "P7",
+      "理想", "Li Auto", "L7", "L8", "L9", "MEGA",
+      "电池", "Battery", "固态电池", "磷酸铁锂", "三元锂",
+      "续航", "Range", "充电", "快充", "超充", "换电",
+      "智能驾驶", "辅助驾驶", "ADAS", "NOA", "NGP",
+      "宁德时代", "CATL", "麒麟电池",
+      "800V", "碳化硅", "SiC"
+    ]
+  },
+  "filter": {
+    "strict_mode": true,
+    "require_ai_match": true,
+    "min_ai_keywords": 1,
+    "exclude_general_tech": true,
+    "excluded_keywords": [
+      "smartphone", "手机", "iPhone", "Samsung",
+      "tablet", "平板", "iPad",
+      "smartwatch", "手表", "Watch",
+      "gaming", "游戏", "Nintendo", "PlayStation", "Xbox",
+      "streaming", "视频流", "Netflix",
+      "social media", "社交媒体",
+      "cryptocurrency", "加密货币", "bitcoin", "区块链",
+      "fashion", "时尚", "clothing", "服装"
+    ]
+  }
+}
