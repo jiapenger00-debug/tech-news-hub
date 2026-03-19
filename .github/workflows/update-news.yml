@@ -9,6 +9,7 @@ on:
 jobs:
   update-news:
     runs-on: ubuntu-latest
+    timeout-minutes: 10  # 设置超时时间为10分钟
     permissions:
       contents: write
       pages: write
@@ -30,9 +31,7 @@ jobs:
         
     - name: Fetch news
       run: |
-        python main_resume.py
-      env:
-        OPENCLAW_API_KEY: ${{ secrets.OPENCLAW_API_KEY }}
+        python main.py
       continue-on-error: true
       
     - name: Setup Pages
