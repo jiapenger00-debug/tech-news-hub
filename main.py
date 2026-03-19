@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-科技新闻聚合器主程序
-自动抓取中英文科技新闻，AI 总结，生成网页
+简化版主程序 - 用于测试
 """
 
 import json
@@ -11,18 +10,10 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-# 设置 Windows 控制台编码
-if sys.platform == 'win32':
-    import io
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
-
 # 添加项目根目录到路径
 sys.path.insert(0, str(Path(__file__).parent))
 
 from fetchers.chinese import ChineseNewsFetcher
-from fetchers.english import EnglishNewsFetcher
-from summarizer import NewsSummarizer
 from renderer import HTMLRenderer
 
 
@@ -35,104 +26,93 @@ def load_config():
 
 def ensure_directories():
     """确保必要的目录存在"""
-    dirs = ["output", "static/css", "static/js", "templates"]
+    dirs = ["output", "static/css", "static/js"]
     for d in dirs:
         Path(d).mkdir(parents=True, exist_ok=True)
 
 
-def fetch_all_news(config):
-    """抓取所有新闻"""
-    all_news = []
-    
-    print("🔄 开始抓取新闻...")
-    
-    # 抓取中文新闻
-    print("📰 抓取中文新闻...")
-    chinese_fetcher = ChineseNewsFetcher(config)
-    chinese_news = chinese_fetcher.fetch()
-    all_news.extend(chinese_news)
-    print(f"   ✓ 获取 {len(chinese_news)} 条中文新闻")
-    
-    # 抓取英文新闻
-    print("📰 抓取英文新闻...")
-    english_fetcher = EnglishNewsFetcher(config)
-    english_news = english_fetcher.fetch()
-    all_news.extend(english_news)
-    print(f"   ✓ 获取 {len(english_news)} 条英文新闻")
-    
-    # 按时间排序
-    all_news.sort(key=lambda x: x.get("published", ""), reverse=True)
-    
-    return all_news
-
-
-def summarize_news(news_list, config):
-    """使用 AI 总结新闻"""
-    if not config["summarizer"]["enabled"]:
-        return news_list
-    
-    print("🤖 正在生成新闻摘要...")
-    summarizer = NewsSummarizer(config)
-    
-    for i, news in enumerate(news_list):
-        if not news.get("summary"):
-            try:
-                summary = summarizer.summarize(news["title"], news.get("content", ""))
-                news["summary"] = summary
-                print(f"   [{i+1}/{len(news_list)}] {news['title'][:50]}...")
-            except Exception as e:
-                print(f"   ⚠️  摘要生成失败: {e}")
-                news["summary"] = news.get("content", "")[:200] + "..."
-    
-    return news_list
-
-
-def generate_website(news_list, config):
-    """生成网页"""
-    print("🎨 生成网页...")
-    renderer = HTMLRenderer(config)
-    output_path = renderer.render(news_list)
-    print(f"   ✓ 网页已生成: {output_path}")
-    return output_path
-
-
 def main():
     """主函数"""
-    print("=" * 60)
-    print("🚀 科技新闻聚合器 - Tech News Aggregator")
-    print("=" * 60)
-    print()
+    print("="*60)
+    print("AI Tech Frontier - 简化版新闻抓取")
+    print("="*60)
     
     # 加载配置
+    print("\n[1/3] 加载配置...")
     config = load_config()
     
     # 确保目录存在
+    print("[2/3] 确保目录存在...")
     ensure_directories()
     
-    # 抓取新闻
-    news_list = fetch_all_news(config)
+    # 只抓取一个中文源进行测试
+    print("\n[3/3] 抓取新闻...")
+    print("测试：只抓取机器之心一个源")
     
-    if not news_list:
-        print("❌ 未获取到任何新闻")
-        return
+    # 临时修改配置，只保留一个源
+    config['sources']['chinese'] = [config['sources']['chinese'][0]]
+    config['sources']['english'] = []  # 禁用英文源
+    config['fetch']['max_articles_per_source'] = 5
     
-    print(f"\n📊 总计获取 {len(news_list)} 条新闻")
-    print()
-    
-    # 生成摘要
-    news_list = summarize_news(news_list, config)
-    print()
-    
-    # 生成网页
-    output_path = generate_website(news_list, config)
-    
-    print()
-    print("=" * 60)
-    print("✅ 完成！")
-    print(f"📄 网页文件: {output_path}")
-    print(f"🌐 请在浏览器中打开查看")
-    print("=" * 60)
+    try:
+        fetcher = ChineseNewsFetcher(config)
+        news = fetcher.fetch()
+        print(f"\n成功抓取 {len(news)} 条新闻")
+        
+        # 生成简单网页
+        print("\n生成网页...")
+        
+        # 复制静态文件
+        import shutil
+        if Path("static/css").exists():
+            shutil.copytree("static/css", "output/css", dirs_exist_ok=True)
+        if Path("static/js").exists():
+            shutil.copytree("static/js", "output/js", dirs_exist_ok=True)
+        
+        # 生成简单 HTML
+        html = f"""<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AI Tech Frontier</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>AI科技前沿</h1>
+        <p class="update-time">更新时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}</p>
+        <div class="news-list">
+"""
+        
+        for item in news[:10]:
+            html += f"""
+            <div class="news-item">
+                <h3><a href="{item.get('link', '#')}" target="_blank">{item.get('title', '无标题')}</a></h3>
+                <p class="summary">{item.get('summary', '无摘要')[:200]}...</p>
+                <span class="source">{item.get('source', '未知')}</span>
+                <span class="date">{item.get('published', '')}</span>
+            </div>
+"""
+        
+        html += """
+        </div>
+    </div>
+</body>
+</html>
+"""
+        
+        with open("output/index.html", "w", encoding="utf-8") as f:
+            f.write(html)
+        
+        print("\n✅ 完成！网页已生成到 output/index.html")
+        return 0
+        
+    except Exception as e:
+        print(f"\n❌ 错误: {e}")
+        import traceback
+        traceback.print_exc()
+        return 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
