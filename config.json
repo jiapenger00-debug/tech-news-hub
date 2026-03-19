@@ -8,6 +8,14 @@
   "sources": {
     "chinese": [
       {
+        "name": "机器之心",
+        "url": "https://www.jiqizhixin.com/rss",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 10
+      },
+      {
         "name": "量子位",
         "url": "https://www.qbitai.com/feed",
         "enabled": true,
@@ -16,18 +24,75 @@
         "priority": 10
       },
       {
-        "name": "雷锋网",
+        "name": "AI科技评论",
         "url": "https://www.leiphone.com/feed",
         "enabled": true,
         "type": "rss",
         "category": "AI",
         "priority": 9
+      },
+      {
+        "name": "新智元",
+        "url": "https://www.ainewsblog.com/feed",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 9
+      },
+      {
+        "name": "高工智能汽车",
+        "url": "https://www.gg-ai.com/rss",
+        "enabled": true,
+        "type": "rss",
+        "category": "智能汽车",
+        "priority": 8
+      },
+      {
+        "name": "汽车之心",
+        "url": "https://www.autobit.xyz/rss",
+        "enabled": true,
+        "type": "rss",
+        "category": "智能汽车",
+        "priority": 8
       }
     ],
-    "english": []
+    "english": [
+      {
+        "name": "TechNode",
+        "url": "https://technode.com/feed/",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 9
+      },
+      {
+        "name": "OpenAI Blog",
+        "url": "https://openai.com/blog/rss.xml",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 10
+      },
+      {
+        "name": "Hugging Face",
+        "url": "https://huggingface.co/blog/feed.xml",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 9
+      },
+      {
+        "name": "DeepMind",
+        "url": "https://www.deepmind.com/blog/rss.xml",
+        "enabled": true,
+        "type": "rss",
+        "category": "AI",
+        "priority": 10
+      }
+    ]
   },
   "fetch": {
-    "max_articles_per_source": 5,
+    "max_articles_per_source": 3,
     "request_timeout": 30,
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     "sort_by": "priority",
