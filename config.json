@@ -151,7 +151,7 @@
     "enabled": true,
     "max_summary_length": 150,
     "language": "zh-CN",
-    "use_ai": false,
+    "use_ai": true,
     "ai_model": "moonshot/kimi-k2.5"
   },
   "output": {
@@ -164,7 +164,7 @@
     "time": "00:00"
   },
   "translation": {
-    "enabled": false,
+    "enabled": true,
     "target_language": "zh-CN",
     "api": "google_translate",
     "auto_translate_links": true
