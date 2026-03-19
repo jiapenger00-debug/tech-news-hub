@@ -8,14 +8,6 @@
   "sources": {
     "chinese": [
       {
-        "name": "机器之心",
-        "url": "https://www.jiqizhixin.com/rss",
-        "enabled": true,
-        "type": "rss",
-        "category": "AI",
-        "priority": 10
-      },
-      {
         "name": "量子位",
         "url": "https://www.qbitai.com/feed",
         "enabled": true,
@@ -24,123 +16,18 @@
         "priority": 10
       },
       {
-        "name": "AI科技评论",
+        "name": "雷锋网",
         "url": "https://www.leiphone.com/feed",
         "enabled": true,
         "type": "rss",
         "category": "AI",
         "priority": 9
-      },
-      {
-        "name": "新智元",
-        "url": "https://www.ainewsblog.com/feed",
-        "enabled": true,
-        "type": "rss",
-        "category": "AI",
-        "priority": 9
-      },
-      {
-        "name": "高工智能汽车",
-        "url": "https://www.gg-ai.com/rss",
-        "enabled": true,
-        "type": "rss",
-        "category": "智能汽车",
-        "priority": 8
-      },
-      {
-        "name": "汽车之心",
-        "url": "https://www.autobit.xyz/rss",
-        "enabled": true,
-        "type": "rss",
-        "category": "智能汽车",
-        "priority": 8
       }
     ],
-    "english": [
-      {
-        "name": "TechCrunch AI",
-        "url": "https://techcrunch.com/category/artificial-intelligence/feed/",
-        "enabled": true,
-        "type": "rss",
-        "category": "AI",
-        "priority": 10
-      },
-      {
-        "name": "VentureBeat AI",
-        "url": "https://venturebeat.com/category/ai/feed/",
-        "enabled": true,
-        "type": "rss",
-        "category": "AI",
-        "priority": 9
-      },
-      {
-        "name": "The Verge AI",
-        "url": "https://www.theverge.com/ai-artificial-intelligence/rss/index.xml",
-        "enabled": true,
-        "type": "rss",
-        "category": "AI",
-        "priority": 9
-      },
-      {
-        "name": "Ars Technica AI",
-        "url": "https://arstechnica.com/tag/artificial-intelligence/feed/",
-        "enabled": true,
-        "type": "rss",
-        "category": "AI",
-        "priority": 8
-      },
-      {
-        "name": "MIT Technology Review",
-        "url": "https://www.technologyreview.com/feed/",
-        "enabled": true,
-        "type": "rss",
-        "category": "AI",
-        "priority": 10
-      },
-      {
-        "name": "OpenAI Blog",
-        "url": "https://openai.com/blog/rss.xml",
-        "enabled": true,
-        "type": "rss",
-        "category": "AI",
-        "priority": 10
-      },
-      {
-        "name": "NVIDIA Blog",
-        "url": "https://blogs.nvidia.com/blog/feed/",
-        "enabled": true,
-        "type": "rss",
-        "category": "AI芯片",
-        "priority": 10
-      },
-      {
-        "name": "Google AI Blog",
-        "url": "https://ai.googleblog.com/feeds/posts/default",
-        "enabled": true,
-        "type": "rss",
-        "category": "AI",
-        "priority": 10
-      },
-      {
-        "name": "Electrek EV",
-        "url": "https://electrek.co/feed/",
-        "enabled": true,
-        "type": "rss",
-        "category": "新能源车",
-        "priority": 8
-      },
-      {
-        "name": "InsideEVs",
-        "url": "https://insideevs.com/rss/news/all/",
-        "enabled": true,
-        "type": "rss",
-        "category": "新能源车",
-        "priority": 7
-      }
-    ]
+    "english": []
   },
   "fetch": {
-    "max_articles_per_source": 15,
+    "max_articles_per_source": 5,
     "request_timeout": 30,
     "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
     "sort_by": "priority",
